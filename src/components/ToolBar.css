@@ -1,0 +1,115 @@
+:root {
+  --green: #27ae60;
+  --black: #2c2c54;
+}
+
+* {
+  font-size: 18px;
+}
+
+.toolbar {
+  margin: 0;
+  height: 100px;
+  background: #fff;
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+.toolbar .container {
+  /* border: 0.1rem solid rgb(0, 0, 0, 0.1); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2rem;
+  height: 100%;
+}
+.toolbar .container .box {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn {
+  color: #000;
+  margin: 1rem;
+  background: none;
+  display: inline-block;
+  padding: 0.5rem 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.btn:hover {
+  background-color: var(--green);
+}
+
+.changeColor {
+  background-color: yellow;
+}
+
+.toolbar .container .reset {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+}
+
+.toolbar .container .adjust {
+  display: block;
+  width: 30%;
+}
+.toolbar .container .adjust .adjust-label {
+  height: 45%;
+  /* border: 0.1rem solid black; */
+  display: flex;
+  align-items: center;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 60%;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+  margin-top: -5px;
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+input[type='range']:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+.toolbar .container .adjust label {
+  width: 15%;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 5px;
+}
+.toolbar .container .method {
+  width: 35%;
+}
+
+.toolbar .container .sort {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+}
+#sortBtn {
+  display: none;
+}

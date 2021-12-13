@@ -1,0 +1,23 @@
+#bodyContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 5rem;
+  height: 520px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 2rem;
+}
+.bar {
+  width: 20px;
+  background-color: blue;
+  display: inline-block;
+  margin: 0 2px;
+  position: relative;
+}
+h3 {
+  text-align: center;
+  font-size: 22px;
+}
