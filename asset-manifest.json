@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/o83213.github.io/sorting-desplay-website/static/css/main.d3333eb3.chunk.css",
+    "main.js": "/o83213.github.io/sorting-desplay-website/static/js/main.62988569.chunk.js",
+    "main.js.map": "/o83213.github.io/sorting-desplay-website/static/js/main.62988569.chunk.js.map",
+    "runtime-main.js": "/o83213.github.io/sorting-desplay-website/static/js/runtime-main.221e970b.js",
+    "runtime-main.js.map": "/o83213.github.io/sorting-desplay-website/static/js/runtime-main.221e970b.js.map",
+    "static/js/2.53d7cfb0.chunk.js": "/o83213.github.io/sorting-desplay-website/static/js/2.53d7cfb0.chunk.js",
+    "static/js/2.53d7cfb0.chunk.js.map": "/o83213.github.io/sorting-desplay-website/static/js/2.53d7cfb0.chunk.js.map",
+    "index.html": "/o83213.github.io/sorting-desplay-website/index.html",
+    "static/css/main.d3333eb3.chunk.css.map": "/o83213.github.io/sorting-desplay-website/static/css/main.d3333eb3.chunk.css.map",
+    "static/js/2.53d7cfb0.chunk.js.LICENSE.txt": "/o83213.github.io/sorting-desplay-website/static/js/2.53d7cfb0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.221e970b.js",
+    "static/js/2.53d7cfb0.chunk.js",
+    "static/css/main.d3333eb3.chunk.css",
+    "static/js/main.62988569.chunk.js"
+  ]
+}
