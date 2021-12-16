@@ -22,7 +22,6 @@ function bubbleSort(data) {
       }
     }
     if (!isSwitch) {
-      console.log(isSwitch);
       const finish = ['finish'];
       for (let k = 0; k < result.length - i; k++) {
         finish.push(k);

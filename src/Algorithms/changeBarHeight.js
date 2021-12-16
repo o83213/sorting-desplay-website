@@ -134,7 +134,6 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         */
         let endTime = timer / 1000;
         setTimeout(() => {
-          console.log('Finished playing animation!');
           document.getElementById(
             'timer'
           ).innerText = `Spend time: ${endTime} sec`;

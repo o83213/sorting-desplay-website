@@ -3,7 +3,6 @@ import { switchData } from './swapFunction';
 function partition(data, start, end, animation) {
   let pivot = start;
   let isFinal = false;
-  console.log(`start is ${start}, end is ${end}`);
   animation.push(['chosen', 'anchor', pivot]);
   while (end > start) {
     // find start index

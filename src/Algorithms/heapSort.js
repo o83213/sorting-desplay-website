@@ -24,9 +24,6 @@ function heapify(data, lastParent, animation) {
         data[anchor] < data[childIndexRight] &&
         data[childIndexLeft] < data[childIndexRight]
       ) {
-        console.log(`childIndexRight is : ${childIndexRight}`);
-        console.log(`childIndexRight value is : ${data[childIndexRight]}`);
-        console.log(`switch with childRight`);
         switchData(data, anchor, childIndexRight);
         // record animation
         animation.push([
@@ -39,7 +36,6 @@ function heapify(data, lastParent, animation) {
         ]);
         anchor = childIndexRight;
       } else if (data[anchor] < data[childIndexLeft]) {
-        console.log(`switch with childleft`);
         switchData(data, anchor, childIndexLeft);
         animation.push([
           'switch',
@@ -61,7 +57,6 @@ function heapify(data, lastParent, animation) {
       childIndexLeft = anchor * 2 + 1;
       childIndexRight = anchor * 2 + 2;
     }
-    console.log(`In heapify, data is : ${data}`);
   }
 }
 
@@ -130,7 +125,6 @@ function takeAway(data, animation) {
       }
       childIndexLeft = anchor * 2 + 1;
       childIndexRight = anchor * 2 + 2;
-      console.log(`In takeaway, data is : ${data}`);
     }
   }
   animation.push(['finish', 0]);
@@ -141,11 +135,8 @@ function heapSort(input) {
   const animation = [];
   const length = data.length;
   const lastParentIndex = 2 ** Math.trunc(Math.log2(length)) - 2;
-  console.log(`lastParentIndex is ${lastParentIndex}`);
   heapify(data, lastParentIndex, animation);
-  console.log(`After heapify, data is ${data}`);
   takeAway(data, animation);
-  console.log(`After takeaway, data is ${data}`);
   return [data, animation];
 }
 
