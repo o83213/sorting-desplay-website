@@ -30,9 +30,3 @@ function Visualizer() {
 }
 
 export default Visualizer;
-
-// {array.map((value, index) => {
-// return (
-//     <div className="bar" id={index} style={{ width: `${value}px` }}></div>
-// )
-// })}

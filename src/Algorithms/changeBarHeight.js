@@ -1,18 +1,18 @@
 const arrayBars = document.getElementsByClassName('bar');
 const closeBtn = document.getElementsByTagName('button');
 const closeInput = document.getElementsByTagName('input');
-// const timeStep = 1000
-// function changeBarHeight(animation, timeDelay = 100) {
+
 function changeBarHeight(inputAnimation, timeDelay = 100) {
   let timer = 0;
   const animation = [...inputAnimation, ['animationEnd']];
-  // const startingTime = new Date().getTime();
+  // close btn when animation is running
   for (const element of closeBtn) {
     element.style.pointerEvents = 'none';
   }
   for (const element of closeInput) {
     element.style.pointerEvents = 'none';
   }
+
   for (let i = 0; i < animation.length; i++) {
     let [action, ...data] = animation[i];
     let isFinal = false;
@@ -42,7 +42,8 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         break;
 
       case 'chosen':
-        // Totally 2 step
+        /* chosne case is use in merge sort and quick sort, in merge sort, the bar after compare will be chosen and painted green, in quick sort, the anchor bar will be chosen and painted yellow.
+         */
         //identify mark
         chosenMark = data.shift();
         let chosenColor = 'green';
@@ -60,10 +61,14 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         timer += timeDelay;
         break;
       case 'replace':
+        /* the replace case is use only in merge sort because the real algorithm in merge sort is spliting the data in smaller piece and merging them into a new array. In order to show this situation in only single array, we overwrite the data in the insertion index.
+         */
+        /* isfinal is to judge if the process is at the final step, if it is, it will be paint into ilght blue!
+         */
+
         isFinal = data.shift();
-        // start index is data[0] end index is data[1]
-        let index = data[0];
-        for (let j = 2; j < data.length; j++) {
+
+        for (let [index, j] = [data[0], 2]; j < data.length; [index++, j++]) {
           // change height
           setTimeout(() => {
             arrayBars[index].style.height = `${data[j]}px`;
@@ -72,23 +77,27 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
           let color = isFinal ? '#00BBFF' : 'blue';
           setTimeout(() => {
             arrayBars[index].style.backgroundColor = color;
-            index++;
           }, timer + timeDelay);
 
           timer += 2 * timeDelay;
         }
         break;
       case 'switch':
+        /* the switch case is use in qicuksort, bubble sort, and heap sort. There is an isFinal mark to check and will paint the data which was not need to change again to light blue. If the data is still needed to be sort, it will be paint in blue.
+         */
         isFinal = data.shift();
         let color = isFinal ? '#00BBFF' : 'blue';
+        // first mark two switch pair in green
         setTimeout(() => {
           arrayBars[data[0]].style.backgroundColor = 'green';
           arrayBars[data[1]].style.backgroundColor = 'green';
         }, timer);
+        // switch their height
         setTimeout(() => {
           arrayBars[data[0]].style.height = `${data[2]}px`;
           arrayBars[data[1]].style.height = `${data[3]}px`;
         }, timer + timeDelay);
+        // after switching, set their color back to blue or final color.
         setTimeout(() => {
           arrayBars[data[0]].style.backgroundColor = 'blue';
           arrayBars[data[1]].style.backgroundColor = color;
@@ -96,6 +105,9 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         timer += 3 * timeDelay;
         break;
       case 'recoverColor':
+        /*
+        recover color is used in in qicuksort, bubble sort, and heap sort. This step is used for recover their color after comparing step or switch step.
+         */
         let recoverIndex = data.length <= 1 ? [data] : [...data];
         setTimeout(() => {
           for (let i = 0; i < recoverIndex.length; i++) {
@@ -105,6 +117,9 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         timer += timeDelay;
         break;
       case 'finish':
+        /*
+        finish is used in in qicuksort, bubble sort, and heap sort. This step is used for marking the finish comparing data.
+         */
         let finishIndex = data.length <= 1 ? [data] : [...data];
         setTimeout(() => {
           for (let i = 0; i < finishIndex.length; i++) {
@@ -114,11 +129,15 @@ function changeBarHeight(inputAnimation, timeDelay = 100) {
         timer += timeDelay;
         break;
       case 'animationEnd':
+        /*
+        this step will be automatically add in the end of the animation to print out the time and change the btn to clickable again
+        */
+        let endTime = timer / 1000;
         setTimeout(() => {
           console.log('Finished playing animation!');
-          document.getElementById('timer').innerText = `Spend time: ${
-            timer / 1000
-          } sec`;
+          document.getElementById(
+            'timer'
+          ).innerText = `Spend time: ${endTime} sec`;
           for (const element of closeBtn) {
             element.style.pointerEvents = 'auto';
           }

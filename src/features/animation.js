@@ -11,7 +11,6 @@ and state
 
 import { createSlice } from '@reduxjs/toolkit';
 import changeBarHeight from '../Algorithms/changeBarHeight';
-import recoverArray from '../Algorithms/recoverArray';
 const initialStateValue = { speed: 10 };
 export const animationSlice = createSlice({
   name: 'animation',
@@ -25,12 +24,8 @@ export const animationSlice = createSlice({
     playAnimation: (state, action) => {
       changeBarHeight(action.payload, state.value.speed);
     },
-    setInitialArray: (state, action) => {
-      recoverArray(action.payload);
-    },
   },
 });
 export const { changeSpeed } = animationSlice.actions;
 export const { playAnimation } = animationSlice.actions;
-export const { setInitialArray } = animationSlice.actions;
 export default animationSlice.reducer;

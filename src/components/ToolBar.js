@@ -1,53 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetArray } from '../features/array';
+import { resetArray, setInitialArray } from '../features/array';
 import { sorting, changeMethod, resetBox } from '../features/sortingBox';
-import {
-  changeSpeed,
-  playAnimation,
-  setInitialArray,
-} from '../features/animation';
+import { changeSpeed, playAnimation } from '../features/animation';
 import './ToolBar.css';
+
 function ToolBar() {
-  const dispatch = useDispatch();
+  // use useState function to get state in function component
   const [minsize, minspeed] = [4, 10];
+  // the arrow function is to give this state an initial state
   const [size, setSize] = useState(() => minsize);
   const [speed, setSpeed] = useState(() => minspeed);
   const [isRunning, setisRunning] = useState(() => false);
-  /*
-  timer testing!
-  */
-  //
+  // use dispacth method to call function from slice(store in the index)
+  const dispatch = useDispatch();
+
+  // use useSelector to call the state from the slice
   const sortedData = useSelector(state => {
     return state.sortingBox.value;
   });
   const array = useSelector(state => {
     return state.array.value;
   });
+
+  // To highlight the chosen btn color and reset other buttons to no color
   const sortingBtn = document.getElementById('sortBtn');
   const methodBtn = document.getElementsByClassName('methodBtn');
-  const resetBtnColor = () => {
+  const resetClickBtn = document.getElementById('resetBtn');
+
+  function resetBtn(event) {
     for (const btn of methodBtn) {
       btn.style.background = 'none';
     }
-  };
+    resetClickBtn.style.background = 'none';
+    sortingBtn.style.display = 'block';
+    event.target.style.background = 'yellow';
+  }
   /* 
   To deal with useState delay problem, we need to use useEffect function out of the render
   and here is to reset array when draging size bar!
   */
   useEffect(() => {
-    // console.log(`size is ${size}`)
     dispatch(resetArray(size));
-    dispatch(setInitialArray(array));
   }, [size]);
   useEffect(() => {
-    // console.log(`speed is ${speed}`)
     dispatch(changeSpeed(speed));
   }, [speed]);
 
   useEffect(() => {
     if (isRunning === true) {
-      dispatch(setInitialArray(array));
+      dispatch(setInitialArray());
       dispatch(playAnimation(sortedData.sortedAnimation));
       setisRunning(false);
     }
@@ -59,14 +61,12 @@ function ToolBar() {
         <div className="box reset">
           <button
             className="btn"
-            onClick={() => {
-              dispatch(setInitialArray(array));
+            id="resetBtn"
+            onClick={event => {
+              dispatch(setInitialArray());
               dispatch(resetArray(size));
-              resetBtnColor();
               dispatch(resetBox());
-              sortingBtn.style.display = 'none';
-              // testing timer!
-              //
+              resetBtn(event);
             }}
           >
             Reset Array!
@@ -79,8 +79,10 @@ function ToolBar() {
               type="range"
               className="size-input"
               defaultValue="0"
+              max={96}
               onChange={event => {
                 setSize(Number(event.target.value) + 4);
+                dispatch(setInitialArray());
               }}
             ></input>
             <label htmlFor="size" id="sizeValue">
@@ -93,6 +95,7 @@ function ToolBar() {
               type="range"
               className="speed-input"
               defaultValue="0"
+              max={99}
               onChange={event => {
                 setSpeed(Number(event.target.value) * 10 + 10);
               }}
@@ -106,11 +109,8 @@ function ToolBar() {
           <button
             className="btn methodBtn"
             onClick={event => {
-              console.log('Merge sort!');
               dispatch(changeMethod('merge'));
-              sortingBtn.style.display = 'block';
-              resetBtnColor();
-              event.target.style.background = 'yellow';
+              resetBtn(event);
             }}
           >
             Merge Sort
@@ -118,11 +118,8 @@ function ToolBar() {
           <button
             className="btn methodBtn"
             onClick={event => {
-              console.log('Quick sort!');
               dispatch(changeMethod('quick'));
-              sortingBtn.style.display = 'block';
-              resetBtnColor();
-              event.target.style.background = 'yellow';
+              resetBtn(event);
             }}
           >
             Quick Sort
@@ -130,11 +127,8 @@ function ToolBar() {
           <button
             className="btn methodBtn"
             onClick={event => {
-              console.log('Heap sort!');
               dispatch(changeMethod('heap'));
-              sortingBtn.style.display = 'block';
-              resetBtnColor();
-              event.target.style.background = 'yellow';
+              resetBtn(event);
             }}
           >
             Heap Sort
@@ -142,11 +136,8 @@ function ToolBar() {
           <button
             className="btn methodBtn"
             onClick={event => {
-              console.log('Bubble sort!');
               dispatch(changeMethod('bubble'));
-              sortingBtn.style.display = 'block';
-              resetBtnColor();
-              event.target.style.background = 'yellow';
+              resetBtn(event);
             }}
           >
             Bubble Sort

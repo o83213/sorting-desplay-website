@@ -9,13 +9,10 @@ and action types that correspond to the reducers
 and state
 */
 
-import { createSlice } from '@reduxjs/toolkit'
-import mergeSort from '../Algorithms/mergeSort'
-import quickSort from '../Algorithms/quickSort'
-import heapSort from '../Algorithms/heapSort'
-import bubbleSort from '../Algorithms/bubbleSort'
+import { createSlice } from '@reduxjs/toolkit';
+import sortByMethod from '../Algorithms/sortByMethod';
 
-const initialStateValue = { sortedResult: [], sortedAnimation: [], method: '' }
+const initialStateValue = { sortedResult: [], sortedAnimation: [], method: '' };
 export const sortingBoxSlice = createSlice({
   name: 'sortingBox',
   initialState: {
@@ -23,50 +20,23 @@ export const sortingBoxSlice = createSlice({
   },
   reducers: {
     sorting: (state, action) => {
-      const data = action.payload.slice()
-      let [result, animation] = [[], []]
-      switch (state.value.method) {
-        case 'merge':
-          console.log(`Now going to use ${state.value.method} sort!`)
-          ;[result, animation] = mergeSort(data)
-          console.log(result)
-          console.log(animation)
-          break
-        case 'quick':
-          console.log(`Now going to use ${state.value.method} sort!`)
-          ;[result, animation] = quickSort(data)
-          console.log(result)
-          console.log(animation)
-          break
-        case 'bubble':
-          console.log(`Now going to use ${state.value.method} sort!`)
-          ;[result, animation] = bubbleSort(data)
-          console.log(result)
-          console.log(animation)
-          break
-        case 'heap':
-          console.log(`Now going to use ${state.value.method} sort!`)
-          ;[result, animation] = heapSort(data)
-          console.log(result)
-          console.log(animation)
-          break
-        default:
-          console.log('No method now!')
-      }
+      let [result, animation] = sortByMethod(
+        state.value.method,
+        action.payload
+      );
       state.value = {
         sortedResult: result,
         sortedAnimation: animation,
         method: state.value.method,
-      }
+      };
     },
     changeMethod: (state, action) => {
-      state.value.method = action.payload
+      state.value.method = action.payload;
     },
-    resetBox: (state) => {
-      console.log('Reset box!')
-      state.value = initialStateValue
+    resetBox: state => {
+      state.value = initialStateValue;
     },
   },
-})
-export default sortingBoxSlice.reducer
-export const { sorting, changeMethod, resetBox } = sortingBoxSlice.actions
+});
+export default sortingBoxSlice.reducer;
+export const { sorting, changeMethod, resetBox } = sortingBoxSlice.actions;

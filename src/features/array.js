@@ -11,6 +11,7 @@ and state
 
 import { createSlice } from '@reduxjs/toolkit';
 import createRandomArray from '../Algorithms/createRandomArray';
+import recoverArray from '../Algorithms/recoverArray';
 const initialStateValue = [];
 export const arraySlice = createSlice({
   name: 'array',
@@ -21,7 +22,11 @@ export const arraySlice = createSlice({
     resetArray: (state, action) => {
       state.value = createRandomArray(action.payload);
     },
+    setInitialArray: state => {
+      recoverArray(state.value);
+    },
   },
 });
 export const { resetArray } = arraySlice.actions;
+export const { setInitialArray } = arraySlice.actions;
 export default arraySlice.reducer;
