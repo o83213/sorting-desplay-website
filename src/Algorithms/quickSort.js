@@ -6,10 +6,8 @@ function partition(data, start, end, animation) {
   animation.push(['chosen', 'anchor', pivot]);
   while (end > start) {
     // find start index
-    // first input [pivot, start] animation, because they will compare first!
-    // animation.push(['chosen', 'start', start]);
     while (end > start && data[start] <= data[pivot]) {
-      // animation.push([pivot, start]);
+      
       if (start !== pivot) {
         animation.push(['recoverColor', start]);
       }
