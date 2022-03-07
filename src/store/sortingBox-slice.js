@@ -10,10 +10,10 @@ and state
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import sortByMethod from '../Algorithms/sortByMethod';
+import sortByMethod from '../algorithms/sortByMethod';
 
 const initialStateValue = { sortedResult: [], sortedAnimation: [], method: '' };
-export const sortingBoxSlice = createSlice({
+const sortingBoxSlice = createSlice({
   name: 'sortingBox',
   initialState: {
     value: initialStateValue,
@@ -38,5 +38,5 @@ export const sortingBoxSlice = createSlice({
     },
   },
 });
-export default sortingBoxSlice.reducer;
-export const { sorting, changeMethod, resetBox } = sortingBoxSlice.actions;
+export default sortingBoxSlice;
+export const sortingBoxAction = sortingBoxSlice.actions;

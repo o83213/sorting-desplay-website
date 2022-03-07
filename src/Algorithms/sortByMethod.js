@@ -1,7 +1,7 @@
-import mergeSort from '../Algorithms/mergeSort';
-import quickSort from '../Algorithms/quickSort';
-import heapSort from '../Algorithms/heapSort';
-import bubbleSort from '../Algorithms/bubbleSort';
+import mergeSort from './mergeSort';
+import quickSort from './quickSort';
+import heapSort from './heapSort';
+import bubbleSort from './bubbleSort';
 
 function sortByMethod(method, input) {
   const data = input.slice();

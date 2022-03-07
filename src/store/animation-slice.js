@@ -10,9 +10,9 @@ and state
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import changeBarHeight from '../Algorithms/changeBarHeight';
+import changeBarHeight from '../algorithms/changeBarHeight';
 const initialStateValue = { speed: 10 };
-export const animationSlice = createSlice({
+const animationSlice = createSlice({
   name: 'animation',
   initialState: {
     value: initialStateValue,
@@ -26,6 +26,5 @@ export const animationSlice = createSlice({
     },
   },
 });
-export const { changeSpeed } = animationSlice.actions;
-export const { playAnimation } = animationSlice.actions;
-export default animationSlice.reducer;
+export const animationAction = animationSlice.actions;
+export default animationSlice;

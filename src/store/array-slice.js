@@ -10,10 +10,10 @@ and state
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import createRandomArray from '../Algorithms/createRandomArray';
-import recoverArray from '../Algorithms/recoverArray';
+import createRandomArray from '../algorithms/createRandomArray';
+import recoverArray from '../algorithms/recoverArray';
 const initialStateValue = [];
-export const arraySlice = createSlice({
+const arraySlice = createSlice({
   name: 'array',
   initialState: {
     value: initialStateValue,
@@ -27,6 +27,5 @@ export const arraySlice = createSlice({
     },
   },
 });
-export const { resetArray } = arraySlice.actions;
-export const { setInitialArray } = arraySlice.actions;
-export default arraySlice.reducer;
+export const arrayAction = arraySlice.actions;
+export default arraySlice;

@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetArray, setInitialArray } from '../features/array';
-import { sorting, changeMethod, resetBox } from '../features/sortingBox';
-import { changeSpeed, playAnimation } from '../features/animation';
+import { arrayAction } from '../../store/array-slice';
+import { sortingBoxAction } from '../../store/sortingBox-slice';
+import { animationAction } from '../../store/animation-slice';
+// import { resetArray, setInitialArray } from '../features/array';
+// import { sorting, changeMethod, resetBox } from '../features/sortingBox';
+// import { changeSpeed, playAnimation } from '../features/animation';
 import './ToolBar.css';
 
 function ToolBar() {
   // use useState function to get state in function component
-  const [minsize, minspeed] = [4, 10];
-  // the arrow function is to give this state an initial state
-  const [size, setSize] = useState(() => minsize);
-  const [speed, setSpeed] = useState(() => minspeed);
-  const [isRunning, setisRunning] = useState(() => false);
+  const [size, setSize] = useState(4);
+  const [speed, setSpeed] = useState(10);
+  const [isRunning, setisRunning] = useState(false);
   // use dispacth method to call function from slice(store in the index)
   const dispatch = useDispatch();
 
   // use useSelector to call the state from the slice
-  const sortedData = useSelector(state => {
-    return state.sortingBox.value;
-  });
-  const array = useSelector(state => {
-    return state.array.value;
-  });
+  const sortedData = useSelector(state => state.sortingBox.value);
+  const array = useSelector(state => state.array.value);
 
   // To highlight the chosen btn color and reset other buttons to no color
   const sortingBtn = document.getElementById('sortBtn');
@@ -41,16 +38,16 @@ function ToolBar() {
   and here is to reset array when draging size bar!
   */
   useEffect(() => {
-    dispatch(resetArray(size));
+    dispatch(arrayAction.resetArray(size));
   }, [size]);
   useEffect(() => {
-    dispatch(changeSpeed(speed));
+    dispatch(animationAction.changeSpeed(speed));
   }, [speed]);
 
   useEffect(() => {
     if (isRunning === true) {
-      dispatch(setInitialArray());
-      dispatch(playAnimation(sortedData.sortedAnimation));
+      dispatch(arrayAction.setInitialArray());
+      dispatch(animationAction.playAnimation(sortedData.sortedAnimation));
       setisRunning(false);
     }
   }, [isRunning]);
@@ -63,9 +60,9 @@ function ToolBar() {
             className="btn"
             id="resetBtn"
             onClick={event => {
-              dispatch(setInitialArray());
-              dispatch(resetArray(size));
-              dispatch(resetBox());
+              dispatch(arrayAction.setInitialArray());
+              dispatch(arrayAction.resetArray(size));
+              dispatch(sortingBoxAction.resetBox());
               resetBtn(event);
             }}
           >
@@ -82,7 +79,7 @@ function ToolBar() {
               max={96}
               onChange={event => {
                 setSize(Number(event.target.value) + 4);
-                dispatch(setInitialArray());
+                dispatch(arrayAction.setInitialArray());
               }}
             ></input>
             <label htmlFor="size" id="sizeValue">
@@ -109,7 +106,7 @@ function ToolBar() {
           <button
             className="btn methodBtn"
             onClick={event => {
-              dispatch(changeMethod('merge'));
+              dispatch(sortingBoxAction.changeMethod('merge'));
               resetBtn(event);
             }}
           >
