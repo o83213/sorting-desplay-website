@@ -13,6 +13,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import createRandomArray from '../algorithms/createRandomArray';
 import recoverArray from '../algorithms/recoverArray';
 const initialStateValue = [];
+const arrayBars = document.getElementsByClassName('bar');
+function recoverArray(initialArray) {
+  for (let i = 0; i < initialArray.length; i++) {
+    arrayBars[i].style.height = `${initialArray[i]}px`;
+    arrayBars[i].style.backgroundColor = 'blue';
+  }
+}
+
 const arraySlice = createSlice({
   name: 'array',
   initialState: {

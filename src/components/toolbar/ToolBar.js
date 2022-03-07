@@ -7,7 +7,7 @@ import { animationAction } from '../../store/animation-slice';
 // import { sorting, changeMethod, resetBox } from '../features/sortingBox';
 // import { changeSpeed, playAnimation } from '../features/animation';
 import './ToolBar.css';
-
+import MethodButton from './MethodButton';
 function ToolBar() {
   // use useState function to get state in function component
   const [size, setSize] = useState(4);
@@ -103,42 +103,10 @@ function ToolBar() {
           </div>
         </div>
         <div className="box method">
-          <button
-            className="btn methodBtn"
-            onClick={event => {
-              dispatch(sortingBoxAction.changeMethod('merge'));
-              resetBtn(event);
-            }}
-          >
-            Merge Sort
-          </button>
-          <button
-            className="btn methodBtn"
-            onClick={event => {
-              dispatch(changeMethod('quick'));
-              resetBtn(event);
-            }}
-          >
-            Quick Sort
-          </button>
-          <button
-            className="btn methodBtn"
-            onClick={event => {
-              dispatch(changeMethod('heap'));
-              resetBtn(event);
-            }}
-          >
-            Heap Sort
-          </button>
-          <button
-            className="btn methodBtn"
-            onClick={event => {
-              dispatch(changeMethod('bubble'));
-              resetBtn(event);
-            }}
-          >
-            Bubble Sort
-          </button>
+          <MethodButton method="merge" />
+          <MethodButton method="quick" />
+          <MethodButton method="heap" />
+          <MethodButton method="bubble" />
         </div>
 
         <div className="box sort">
@@ -146,7 +114,7 @@ function ToolBar() {
             className="btn"
             id="sortBtn"
             onClick={() => {
-              dispatch(sorting(array));
+              dispatch(sortingBoxAction.sorting(array));
               setisRunning(true);
             }}
           >
