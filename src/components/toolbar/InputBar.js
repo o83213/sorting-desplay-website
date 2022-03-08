@@ -6,10 +6,6 @@ const InputBar = props => {
     setValue(Number(event.target.value));
     props.InputFnc();
   };
-  // useEffect(() => {
-  //   console.log(value + 4);
-  //   props.InputFnc(value + 4);
-  // }, value);
   return (
     <div className={classes.adjust}>
       <label htmlFor="input">{props.name}:</label>

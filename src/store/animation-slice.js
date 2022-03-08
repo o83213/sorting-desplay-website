@@ -11,19 +11,21 @@ and state
 
 import { createSlice } from '@reduxjs/toolkit';
 import changeBarHeight from '../algorithms/changeBarHeight';
-const initialStateValue = { speed: 10 };
+const initialState = { animationData: [], speed: 10 };
 const animationSlice = createSlice({
   name: 'animation',
-  initialState: {
-    value: initialStateValue,
-  },
+  initialState,
   reducers: {
     changeSpeed: (state, action) => {
       console.log(action.payload);
-      state.value.speed = action.payload;
+      state.speed = action.payload;
+    },
+    storeAnimation: (state, action) => {
+      state.animationData = action.payload;
+      // console.log(state.animationData);
     },
     playAnimation: (state, action) => {
-      changeBarHeight(action.payload, state.value.speed);
+      changeBarHeight(action.payload, state.speed);
     },
   },
 });

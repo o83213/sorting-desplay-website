@@ -3,8 +3,11 @@ import quickSort from './quickSort';
 import heapSort from './heapSort';
 import bubbleSort from './bubbleSort';
 
-function sortByMethod(method, input) {
-  const data = input.slice();
+function sortByMethod(input, method) {
+  const data = [];
+  input.forEach(obj => {
+    data.push(obj.height);
+  });
   let result = [];
   let animation = [];
   switch (method) {

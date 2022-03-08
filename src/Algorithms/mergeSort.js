@@ -8,6 +8,7 @@ function mergeSort(data) {
     endIndex,
     animation
   ) {
+    // console.log(helperData);
     //When merge, replace data is not important, its just a container to record replace index and value, you can even copy the replacedata in the function, but may cause some space wasted problem!
     let i = startIndex;
     let j = middleIndex + 1;
@@ -27,7 +28,6 @@ function mergeSort(data) {
       } else {
         animation.push(['chosen', '', j]);
         replaceAnimation.push(helperData[j]);
-        // animation.push([k, helperData[j]])
         replaceData[k++] = helperData[j++];
       }
     }
@@ -46,6 +46,7 @@ function mergeSort(data) {
   }
   function splitAndMerge(data, helperData, startIndex, endIndex, animation) {
     // the helperdata is used to help compare which value is bigger in the array(which is a copy of original data), and data is to store the switch result.
+    // console.log(helperData);
     const middleIndex = Math.trunc((startIndex + endIndex) / 2);
     if (startIndex >= endIndex) {
       return;

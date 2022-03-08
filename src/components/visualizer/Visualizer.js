@@ -18,7 +18,7 @@ function Visualizer() {
               className="bar"
               key={index}
               style={{
-                height: `${data.value}px`,
+                height: `${data.height}px`,
                 backgroundColor: `${data.color ? data.color : 'blue'}`,
               }}
             ></div>

@@ -3,7 +3,9 @@ const MethodButton = props => {
   return (
     <button
       className={classes.btn}
-      onClick={props.buttonFnc}
+      onClick={() => {
+        props.buttonFnc(props.method);
+      }}
     >{`${props.method}`}</button>
   );
 };

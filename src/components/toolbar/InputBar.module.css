@@ -5,13 +5,13 @@
 }
 .adjust label {
   font-size: 1rem;
-  border: 0.1rem solid black;
+  /* border: 0.1rem solid black; */
   display: flex;
   align-items: center;
 }
 
 input[type='range'] {
-  border: 0.1rem solid red;
+  /* border: 0.1rem solid red; */
   -webkit-appearance: none;
   width: 60%;
 }

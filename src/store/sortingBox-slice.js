@@ -12,29 +12,23 @@ and state
 import { createSlice } from '@reduxjs/toolkit';
 import sortByMethod from '../algorithms/sortByMethod';
 
-const initialStateValue = { sortedResult: [], sortedAnimation: [], method: '' };
+const initialState = { sortedResult: [], sortedAnimation: [], method: '' };
 const sortingBoxSlice = createSlice({
   name: 'sortingBox',
-  initialState: {
-    value: initialStateValue,
-  },
+  initialState,
   reducers: {
     sorting: (state, action) => {
-      let [result, animation] = sortByMethod(
-        state.value.method,
-        action.payload
-      );
-      state.value = {
-        sortedResult: result,
-        sortedAnimation: animation,
-        method: state.value.method,
-      };
+      console.log(action.payload);
+      let [result, animation] = sortByMethod(state.method, action.payload);
+      console.log([result, animation]);
     },
     changeMethod: (state, action) => {
-      state.value.method = action.payload;
+      state.method = action.payload;
+      console.log(`Change method to ${state.method}`);
     },
-    resetBox: state => {
-      state.value = initialStateValue;
+    storeSortingResult: (state, action) => {
+      state.sortedResult = action.payload.sortedResult;
+      state.sortedAnimation = action.payload.sortedAnimation;
     },
   },
 });

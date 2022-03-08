@@ -11,7 +11,7 @@ and state
 
 import { createSlice } from '@reduxjs/toolkit';
 import createRandomArray from '../algorithms/createRandomArray';
-const initialStateValue = [];
+const initialState = { value: [] };
 // const arrayBars = document.getElementsByClassName('bar');
 // function recoverArray(initialArray) {
 //   for (let i = 0; i < initialArray.length; i++) {
@@ -22,28 +22,36 @@ const initialStateValue = [];
 
 const arraySlice = createSlice({
   name: 'array',
-  initialState: {
-    value: initialStateValue,
-  },
+  initialState,
   reducers: {
     resetArray: (state, action) => {
       // state.value = createRandomArray(action.payload);
       let data = [];
       createRandomArray(action.payload).forEach(el => {
-        data.push({ value: el, color: 'blue' });
+        data.push({ height: el, color: 'blue' });
       });
       console.log(data);
       state.value = data;
     },
     changeArrayByIndex: (state, action) => {
-      // accept payload as an obj {index: [], value: []}
-      state.value.forEach(item => console.log(item));
       let newArray = state.value;
       for (let i = 0; i < action.payload.index.length; i++) {
-        newArray[action.payload.index[i]] = action.payload.value[i];
+        // console.log(newArray[action.payload.index[i]].height);
+        // console.log(newArray[action.payload.index[i]].color);
+        // ////////////////////////////////
+        // console.log(action.payload.index[i]);
+        console.log(action.payload.value[i]);
+        if (action.payload.value[i].height) {
+          newArray[action.payload.index[i]].height =
+            action.payload.value[i].height;
+        }
+        if (action.payload.value[i].color) {
+          newArray[action.payload.index[i]].color =
+            action.payload.value[i].color;
+        }
+        // newArray[action.payload.index[i]] = action.payload.value[i];
       }
       state.value = newArray;
-      state.value.forEach(item => console.log(item));
     },
   },
 });

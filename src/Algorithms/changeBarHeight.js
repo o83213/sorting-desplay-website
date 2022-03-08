@@ -1,7 +1,6 @@
 const arrayBars = document.getElementsByClassName('bar');
 const closeBtn = document.getElementsByTagName('button');
 const closeInput = document.getElementsByTagName('input');
-
 function changeBarHeight(inputAnimation, timeDelay = 100) {
   let timer = 0;
   const animation = [...inputAnimation, ['animationEnd']];
