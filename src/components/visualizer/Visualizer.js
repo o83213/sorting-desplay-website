@@ -1,22 +1,25 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './Visualizer.css';
 function Visualizer() {
-  const array = useSelector(state => {
+  const [array, setArray] = useState([]);
+  const arrayData = useSelector(state => {
     return state.array.value;
   });
-
+  useEffect(() => {
+    setArray(arrayData);
+  }, [arrayData]);
   return (
     <div>
       <div id="bodyContainer">
-        {array.map((value, index) => {
+        {array.map((data, index) => {
           return (
             <div
               className="bar"
               key={index}
               style={{
-                height: `${value}px`,
-                backgroundColor: 'blue',
+                height: `${data.value}px`,
+                backgroundColor: `${data.color ? data.color : 'blue'}`,
               }}
             ></div>
           );

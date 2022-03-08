@@ -19,6 +19,7 @@ const animationSlice = createSlice({
   },
   reducers: {
     changeSpeed: (state, action) => {
+      console.log(action.payload);
       state.value.speed = action.payload;
     },
     playAnimation: (state, action) => {

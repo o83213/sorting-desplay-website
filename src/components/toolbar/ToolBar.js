@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { arrayAction } from '../../store/array-slice';
 import { sortingBoxAction } from '../../store/sortingBox-slice';
@@ -8,11 +8,15 @@ import { animationAction } from '../../store/animation-slice';
 // import { changeSpeed, playAnimation } from '../features/animation';
 import './ToolBar.css';
 import MethodButton from './MethodButton';
+import InputBar from './InputBar';
 function ToolBar() {
   // use useState function to get state in function component
   const [size, setSize] = useState(4);
   const [speed, setSpeed] = useState(10);
   const [isRunning, setisRunning] = useState(false);
+  //
+  const sizeRef = useRef();
+  const speedRef = useRef();
   // use dispacth method to call function from slice(store in the index)
   const dispatch = useDispatch();
 
@@ -40,9 +44,6 @@ function ToolBar() {
   useEffect(() => {
     dispatch(arrayAction.resetArray(size));
   }, [size]);
-  useEffect(() => {
-    dispatch(animationAction.changeSpeed(speed));
-  }, [speed]);
 
   useEffect(() => {
     if (isRunning === true) {
@@ -51,62 +52,84 @@ function ToolBar() {
       setisRunning(false);
     }
   }, [isRunning]);
-
+  const resetArrayHandler = () => {
+    console.log(size);
+    dispatch(arrayAction.resetArray(size));
+  };
+  const changeSizeHandler = () => {
+    const realSize = Number(sizeRef.current.value) + 4;
+    console.log(realSize);
+    setSize(realSize);
+    // resetArrayHandler();
+  };
+  const changeSpeedHandler = () => {
+    const realSpeed = Number(speedRef.current.value) * 10 + 10;
+    console.log(realSpeed);
+    setSpeed(realSpeed);
+    dispatch(animationAction.changeSpeed(realSpeed));
+  };
   return (
     <div className="toolbar">
       <div className="container">
         <div className="box reset">
-          <button
-            className="btn"
-            id="resetBtn"
-            onClick={event => {
-              dispatch(arrayAction.setInitialArray());
-              dispatch(arrayAction.resetArray(size));
-              dispatch(sortingBoxAction.resetBox());
-              resetBtn(event);
-            }}
-          >
+          <button className="btn" onClick={resetArrayHandler}>
             Reset Array!
           </button>
         </div>
         <div className="box adjust">
-          <div className="adjust-label">
-            <label htmlFor="size">Size:</label>
-            <input
-              type="range"
-              className="size-input"
-              defaultValue="0"
-              max={96}
-              onChange={event => {
-                setSize(Number(event.target.value) + 4);
-                dispatch(arrayAction.setInitialArray());
-              }}
-            ></input>
-            <label htmlFor="size" id="sizeValue">
-              {size} bars
-            </label>
-          </div>
-          <div className="adjust-label">
-            <label htmlFor="speed">Speed:</label>
-            <input
-              type="range"
-              className="speed-input"
-              defaultValue="0"
-              max={99}
-              onChange={event => {
-                setSpeed(Number(event.target.value) * 10 + 10);
-              }}
-            ></input>
-            <label htmlFor="speed" id="speedValue">
-              {speed} ms
-            </label>
-          </div>
+          <InputBar
+            name="Size"
+            unit="bars"
+            setRef={sizeRef}
+            initialValue={4}
+            changeStep={1}
+            InputFnc={changeSizeHandler}
+          />
+          <InputBar
+            name="Speed"
+            unit="ms"
+            setRef={speedRef}
+            initialValue={10}
+            changeStep={10}
+            InputFnc={changeSpeedHandler}
+          />
         </div>
         <div className="box method">
-          <MethodButton method="merge" />
-          <MethodButton method="quick" />
-          <MethodButton method="heap" />
-          <MethodButton method="bubble" />
+          <MethodButton
+            method="merge"
+            buttonFnc={() => {
+              console.log('merge');
+            }}
+          />
+          <MethodButton
+            method="quick"
+            buttonFnc={() => {
+              console.log('quick');
+            }}
+          />
+          <MethodButton
+            method="heap"
+            buttonFnc={() => {
+              console.log('heap');
+            }}
+          />
+          <MethodButton
+            method="bubble"
+            buttonFnc={() => {
+              console.log('bubble');
+            }}
+          />
+          <MethodButton
+            method="test"
+            buttonFnc={() => {
+              dispatch(
+                arrayAction.changeArrayByIndex({
+                  index: [1],
+                  value: [{ value: 300 }],
+                })
+              );
+            }}
+          />
         </div>
 
         <div className="box sort">
