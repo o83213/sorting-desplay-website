@@ -17,14 +17,8 @@ const sortingBoxSlice = createSlice({
   name: 'sortingBox',
   initialState,
   reducers: {
-    sorting: (state, action) => {
-      console.log(action.payload);
-      let [result, animation] = sortByMethod(state.method, action.payload);
-      console.log([result, animation]);
-    },
     changeMethod: (state, action) => {
       state.method = action.payload;
-      console.log(`Change method to ${state.method}`);
     },
     storeSortingResult: (state, action) => {
       state.sortedResult = action.payload.sortedResult;

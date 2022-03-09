@@ -9,9 +9,8 @@ const DUMMY_ANIMATION = [
 ];
 const translateAnimation = inputAnimation => {
   let translatedAnimation = [];
-  console.log(inputAnimation);
+
   inputAnimation.forEach(item => {
-    // console.log(item);
     const [tag, ...data] = item;
     let isFinal = false;
     if (tag === 'region') {
@@ -56,9 +55,9 @@ const translateAnimation = inputAnimation => {
     }
     if (tag === 'replace') {
       // create 1 frame for each for loop
-      isFinal = data[0];
-      console.log(isFinal);
-      for (let [i, j] = [data[1], 3]; j < data.length; [i++, j++]) {
+      isFinal = data.shift();
+
+      for (let [i, j] = [data[0], 2]; j < data.length; [i++, j++]) {
         let color = isFinal ? '#00BBFF' : 'blue';
         translatedAnimation.push({
           index: [i],
@@ -66,16 +65,67 @@ const translateAnimation = inputAnimation => {
         });
       }
     }
+    if (tag === 'switch') {
+      /* the switch case is use in qicuksort, bubble sort, and heap sort. There is an isFinal mark to check and will paint the data which was not need to change again to light blue. If the data is still needed to be sort, it will be paint in blue.
+       */
+      isFinal = data.shift();
+      let color = isFinal ? '#00BBFF' : 'blue';
+      // first mark two switch pair in green
+      translatedAnimation.push({
+        index: [data[0], data[1]],
+        value: [
+          { height: null, color: 'green' },
+          { height: null, color: 'green' },
+        ],
+      });
+      // switch their height
+      translatedAnimation.push({
+        index: [data[0], data[1]],
+        value: [
+          { height: data[2], color: 'green' },
+          { height: data[3], color: 'green' },
+        ],
+      });
+      // after switching, set their color back to blue or final color.
+      translatedAnimation.push({
+        index: [data[0], data[1]],
+        value: [
+          { height: null, color: 'blue' },
+          { height: null, color: color },
+        ],
+      });
+    }
+    if (tag === 'recoverColor') {
+      let recoverIndex = data.length <= 1 ? [data] : [...data];
+      let index = [];
+      let value = [];
+      for (let i = 0; i < recoverIndex.length; i++) {
+        index.push(recoverIndex[i]);
+        value.push({ height: null, color: 'blue' });
+        // arrayBars[recoverIndex[i]].style.backgroundColor = 'blue';
+      }
+      translatedAnimation.push({ index, value });
+    }
+    if (tag === 'finish') {
+      let finishIndex = data.length <= 1 ? [data] : [...data];
+      let index = [];
+      let value = [];
+      for (let i = 0; i < finishIndex.length; i++) {
+        index.push(finishIndex[i]);
+        value.push({ height: null, color: '#00BBFF' });
+        // arrayBars[finishIndex[i]].style.backgroundColor = '#00BBFF';
+      }
+      translatedAnimation.push({ index, value });
+    }
   });
   return translatedAnimation;
 };
 export const sortingArray = (array, method) => {
   return dispatch => {
-    // console.log(method);
     const [result, animation] = sortByMethod(array, method);
-    // console.log([result, animation]);
+
     let translatedAnimation = translateAnimation(animation);
-    // console.log(translatedAnimation);
+
     dispatch(animationAction.storeAnimation(translatedAnimation));
     dispatch(
       sortingBoxAction.storeSortingResult({

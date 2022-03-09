@@ -16,9 +16,9 @@ function ToolBar() {
   const [size, setSize] = useState(4);
   const [speed, setSpeed] = useState(10);
   const [sortedData, setSortedData] = useState({});
-  const [method, setMethod] = useState('');
   const [isRunning, setisRunning] = useState(false);
-  const [hasMethod, setHasMethod] = useState(false);
+  const [isReadyToSort, setIsReadyToSort] = useState(false);
+
   //
   const sizeRef = useRef();
   const speedRef = useRef();
@@ -30,76 +30,54 @@ function ToolBar() {
     state => state.sortingBox
   );
   const array = useSelector(state => state.array.value);
-
+  const isAnimationRunning = useSelector(state => state.animation.isRunning);
+  //
+  useEffect(() => {
+    setisRunning(isAnimationRunning);
+  }, [isAnimationRunning]);
   // To highlight the chosen btn color and reset other buttons to no color
-  // const sortingBtn = document.getElementById('sortBtn');
-  // const methodBtn = document.getElementsByClassName('methodBtn');
-  // const resetClickBtn = document.getElementById('resetBtn');
-
-  // function resetBtn(event) {
-  //   for (const btn of methodBtn) {
-  //     btn.style.background = 'none';
-  //   }
-  //   resetClickBtn.style.background = 'none';
-  //   sortingBtn.style.display = 'block';
-  //   event.target.style.background = 'yellow';
-  // }
-  /* 
-  To deal with useState delay problem, we need to use useEffect function out of the render
-  and here is to reset array when draging size bar!
-  */
   useEffect(() => {
     dispatch(arrayAction.resetArray(size));
   }, [dispatch, size]);
-
+  ////
   useEffect(() => {
-    if (isRunning === true) {
-      // dispatch(animationAction.playAnimation(sortedData.sortedAnimation));
-      setisRunning(false);
-    }
-  }, [dispatch, isRunning]);
-  useEffect(() => {
-    console.log(sortingMethod);
-    setMethod(sortingMethod);
-  }, [sortingMethod]);
-  useEffect(() => {
-    console.log('sortedResult change!');
     setSortedData({ sortedResult, sortedAnimation });
   }, [sortedResult, sortedAnimation]);
+  /////
   const resetArrayHandler = () => {
-    console.log(size);
+    // console.log(size);
     dispatch(arrayAction.resetArray(size));
   };
   const changeSizeHandler = () => {
     const realSize = Number(sizeRef.current.value) + 4;
-    console.log(realSize);
+    // console.log(realSize);
     setSize(realSize);
-    // resetArrayHandler();
   };
   const changeSpeedHandler = () => {
     const realSpeed = Number(speedRef.current.value) * 10 + 10;
-    console.log(realSpeed);
+    // console.log(realSpeed);
     setSpeed(realSpeed);
     dispatch(animationAction.changeSpeed(realSpeed));
   };
   const changeSortingMethodHandler = newMethod => {
-    setHasMethod(true);
+    setIsReadyToSort(true);
     dispatch(sortingBoxAction.changeMethod(newMethod));
     dispatch(sortingArray(array, newMethod));
     // setisRunning(true);
   };
   const sortingArrayHandler = () => {
-    console.log('sort!');
-    // dispatch(sortingArray(array, method));
-    setisRunning(true);
-    console.log(sortedData.sortedAnimation);
+    setIsReadyToSort(false);
     dispatch(displayAnimation(sortedData.sortedAnimation, speed));
   };
   return (
     <div className={classes['toolbar']}>
       <div className={classes['container']}>
         <div className={classes['reset']}>
-          <button className={classes['btn']} onClick={resetArrayHandler}>
+          <button
+            className={`${classes['btn']} ${isRunning && classes.disable}`}
+            onClick={resetArrayHandler}
+            disabled={isRunning}
+          >
             Reset Array!
           </button>
         </div>
@@ -122,17 +100,32 @@ function ToolBar() {
           />
         </div>
         <div className={classes['method']}>
-          <MethodButton method="merge" buttonFnc={changeSortingMethodHandler} />
-          <MethodButton method="quick" buttonFnc={changeSortingMethodHandler} />
-          <MethodButton method="heap" buttonFnc={changeSortingMethodHandler} />
+          <MethodButton
+            method="merge"
+            buttonFnc={changeSortingMethodHandler}
+            isRunning={isRunning}
+          />
+          <MethodButton
+            method="quick"
+            buttonFnc={changeSortingMethodHandler}
+            isRunning={isRunning}
+          />
+          <MethodButton
+            method="heap"
+            buttonFnc={changeSortingMethodHandler}
+            isRunning={isRunning}
+          />
           <MethodButton
             method="bubble"
             buttonFnc={changeSortingMethodHandler}
+            isRunning={isRunning}
           />
         </div>
 
         <div className={classes['sort']}>
-          {hasMethod && <SortingButton buttonFnc={sortingArrayHandler} />}
+          {isReadyToSort && (
+            <SortingButton buttonFnc={sortingArrayHandler} message={'sort!'} />
+          )}
         </div>
       </div>
     </div>

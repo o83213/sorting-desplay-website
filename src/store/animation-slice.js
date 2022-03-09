@@ -10,22 +10,20 @@ and state
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import changeBarHeight from '../algorithms/changeBarHeight';
-const initialState = { animationData: [], speed: 10 };
+const initialState = { animationData: [], speed: 10, isRunning: false };
 const animationSlice = createSlice({
   name: 'animation',
   initialState,
   reducers: {
     changeSpeed: (state, action) => {
-      console.log(action.payload);
       state.speed = action.payload;
     },
     storeAnimation: (state, action) => {
       state.animationData = action.payload;
       // console.log(state.animationData);
     },
-    playAnimation: (state, action) => {
-      changeBarHeight(action.payload, state.speed);
+    changingRunningState(state, action) {
+      state.isRunning = action.payload;
     },
   },
 });

@@ -12,6 +12,9 @@
   text-transform: capitalize;
 }
 
-.btn:hover {
+.btn:hover:enabled {
   background-color: var(--green);
+}
+.disable {
+  cursor: not-allowed;
 }

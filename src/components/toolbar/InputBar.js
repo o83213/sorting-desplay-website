@@ -13,7 +13,7 @@ const InputBar = props => {
         type="range"
         className="input"
         defaultValue="0"
-        max={96}
+        max={99}
         step={1}
         ref={props.setRef}
         onChange={changeValueHandler}

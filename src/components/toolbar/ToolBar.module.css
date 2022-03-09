@@ -40,8 +40,11 @@
   border-radius: 0.5rem;
 }
 
-.btn:hover {
+.btn:hover:enabled {
   background-color: var(--green);
+}
+.disable {
+  cursor: not-allowed;
 }
 
 .changeColor {

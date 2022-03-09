@@ -30,17 +30,12 @@ const arraySlice = createSlice({
       createRandomArray(action.payload).forEach(el => {
         data.push({ height: el, color: 'blue' });
       });
-      console.log(data);
+
       state.value = data;
     },
     changeArrayByIndex: (state, action) => {
       let newArray = state.value;
       for (let i = 0; i < action.payload.index.length; i++) {
-        // console.log(newArray[action.payload.index[i]].height);
-        // console.log(newArray[action.payload.index[i]].color);
-        // ////////////////////////////////
-        // console.log(action.payload.index[i]);
-        console.log(action.payload.value[i]);
         if (action.payload.value[i].height) {
           newArray[action.payload.index[i]].height =
             action.payload.value[i].height;
@@ -49,7 +44,6 @@ const arraySlice = createSlice({
           newArray[action.payload.index[i]].color =
             action.payload.value[i].color;
         }
-        // newArray[action.payload.index[i]] = action.payload.value[i];
       }
       state.value = newArray;
     },
