@@ -3,13 +3,11 @@ import { animationAction } from './animation-slice';
 export const displayAnimation = (animation, speed) => {
   return dispatch => {
     let timmer = 0;
-    let testTimer;
 
     dispatch(animationAction.changingRunningState(true));
     animation.forEach(item => {
       timmer += speed;
-      //   console.log(item);
-      testTimer = setTimeout(() => {
+      setTimeout(() => {
         dispatch(arrayAction.changeArrayByIndex(item));
       }, timmer);
     });

@@ -26,7 +26,7 @@ function ToolBar() {
   const dispatch = useDispatch();
 
   // use useSelector to call the state from the slice
-  const { method: sortingMethod, sortedResult, sortedAnimation } = useSelector(
+  const { sortedResult, sortedAnimation } = useSelector(
     state => state.sortingBox
   );
   const array = useSelector(state => state.array.value);

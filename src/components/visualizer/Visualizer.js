@@ -11,14 +11,10 @@ function Visualizer() {
   }, [arrayData]);
   useEffect(() => {
     const startingTime = new Date();
-    console.log(isRunning);
     let countingTime;
     if (isRunning) {
-      console.log('Renew Timmer!');
-      console.log(startingTime);
       countingTime = setInterval(() => {
         const now = new Date();
-        console.log(now - startingTime);
         setTimmer(now - startingTime);
       }, 100);
     }

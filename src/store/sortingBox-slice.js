@@ -10,7 +10,6 @@ and state
 */
 
 import { createSlice } from '@reduxjs/toolkit';
-import sortByMethod from '../algorithms/sortByMethod';
 
 const initialState = { sortedResult: [], sortedAnimation: [], method: '' };
 const sortingBoxSlice = createSlice({

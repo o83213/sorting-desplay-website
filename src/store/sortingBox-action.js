@@ -1,12 +1,6 @@
 import { animationAction } from '../store/animation-slice';
 import { sortingBoxAction } from './sortingBox-slice';
 import sortByMethod from '../algorithms/sortByMethod';
-const DUMMY_ANIMATION = [
-  { index: [0], value: [{ height: 300, color: 'red' }] },
-  { index: [1], value: [{ height: 300, color: 'red' }] },
-  { index: [2], value: [{ height: 300, color: 'red' }] },
-  { index: [3], value: [{ height: 300, color: 'red' }] },
-];
 const translateAnimation = inputAnimation => {
   let translatedAnimation = [];
 
@@ -21,12 +15,9 @@ const translateAnimation = inputAnimation => {
       for (let i = data[0]; i <= data[1]; i++) {
         index.push(i);
         value.push({ height: null, color: 'yellow' });
-        // arrayBars[i].style.backgroundColor = 'yellow';
       }
       // translatedAnimation.push({ index, value });
       // //paint right region orange
-      // index = [];
-      // value = [];
       for (let i = data[1] + 1; i <= data[2]; i++) {
         index.push(i);
         value.push({ height: null, color: 'orange' });
@@ -102,7 +93,6 @@ const translateAnimation = inputAnimation => {
       for (let i = 0; i < recoverIndex.length; i++) {
         index.push(recoverIndex[i]);
         value.push({ height: null, color: 'blue' });
-        // arrayBars[recoverIndex[i]].style.backgroundColor = 'blue';
       }
       translatedAnimation.push({ index, value });
     }
@@ -113,7 +103,6 @@ const translateAnimation = inputAnimation => {
       for (let i = 0; i < finishIndex.length; i++) {
         index.push(finishIndex[i]);
         value.push({ height: null, color: '#00BBFF' });
-        // arrayBars[finishIndex[i]].style.backgroundColor = '#00BBFF';
       }
       translatedAnimation.push({ index, value });
     }
