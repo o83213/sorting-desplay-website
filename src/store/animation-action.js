@@ -1,7 +1,7 @@
 import { arrayAction } from './array-slice';
 import { animationAction } from './animation-slice';
 export const displayAnimation = (animation, speed) => {
-  return async dispatch => {
+  return dispatch => {
     let timmer = 0;
     let testTimer;
 

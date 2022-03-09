@@ -1,19 +1,17 @@
 .adjust {
   display: flex;
   width: 100%;
-  border: 0.1rem solid black;
 }
 .adjust label {
-  font-size: 1rem;
-  /* border: 0.1rem solid black; */
-  display: flex;
+  width: 20%;
+  font-size: 1.2rem;
+  width: 5rem;
   align-items: center;
 }
 
 input[type='range'] {
-  /* border: 0.1rem solid red; */
   -webkit-appearance: none;
-  width: 60%;
+  width: 50%;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
