@@ -1,10 +1,7 @@
-:root {
-  --green: #27ae60;
-  --black: #2c2c54;
-}
-
 * {
   font-size: 18px;
+  --green: #27ae60;
+  --black: #2c2c54;
 }
 
 .toolbar {
@@ -20,12 +17,6 @@
   align-items: center;
   margin: 0 2rem;
   height: 100%;
-}
-.toolbar .container .box {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: space-between;
 }
 .btn {
   color: #000;

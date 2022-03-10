@@ -10,8 +10,8 @@ const InputBar = props => {
     <div className={classes.adjust}>
       <label htmlFor="input">{props.name}:</label>
       <input
+        id="input"
         type="range"
-        className="input"
         defaultValue="0"
         max={99}
         step={1}

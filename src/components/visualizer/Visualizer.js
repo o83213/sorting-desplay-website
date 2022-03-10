@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import './Visualizer.css';
+import classes from './Visualizer.module.css';
 function Visualizer() {
   const [array, setArray] = useState([]);
-  const [timmer, setTimmer] = useState(0);
+  const [timer, setTimmer] = useState(0);
   const arrayData = useSelector(state => state.array.value);
   const isRunning = useSelector(state => state.animation.isRunning);
   useEffect(() => {
@@ -24,11 +24,11 @@ function Visualizer() {
   }, [isRunning]);
   return (
     <div>
-      <div id="bodyContainer">
+      <div className={classes['bodyContainer']}>
         {array.map((data, index) => {
           return (
             <div
-              className="bar"
+              className={classes['bar']}
               key={index}
               style={{
                 height: `${data.height}px`,
@@ -39,7 +39,7 @@ function Visualizer() {
         })}
       </div>
       <div>
-        <h3 id="timer">{(timmer / 1000).toFixed(1)} seconds</h3>
+        <h3>{(timer / 1000).toFixed(1)} seconds</h3>
       </div>
     </div>
   );

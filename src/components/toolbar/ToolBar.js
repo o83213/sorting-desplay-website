@@ -18,53 +18,51 @@ function ToolBar() {
   const [sortedData, setSortedData] = useState({});
   const [isRunning, setisRunning] = useState(false);
   const [isReadyToSort, setIsReadyToSort] = useState(false);
-
-  //
+  // use useRef method to take out the value from the to inputBar
   const sizeRef = useRef();
   const speedRef = useRef();
   // use dispacth method to call function from slice(store in the index)
   const dispatch = useDispatch();
-
   // use useSelector to call the state from the slice
   const { sortedResult, sortedAnimation } = useSelector(
     state => state.sortingBox
   );
   const array = useSelector(state => state.array.value);
   const isAnimationRunning = useSelector(state => state.animation.isRunning);
-  //
+  // To change the isRunning state
   useEffect(() => {
     setisRunning(isAnimationRunning);
   }, [isAnimationRunning]);
-  // To highlight the chosen btn color and reset other buttons to no color
+  // To reset array immediately when the size is changed!
   useEffect(() => {
     dispatch(arrayAction.resetArray(size));
   }, [dispatch, size]);
-  ////
+  // To store the result when the sortedResult, animation were changed
   useEffect(() => {
     setSortedData({ sortedResult, sortedAnimation });
   }, [sortedResult, sortedAnimation]);
-  /////
+  // To reset array when user manually click the reset button
   const resetArrayHandler = () => {
-    // console.log(size);
     dispatch(arrayAction.resetArray(size));
   };
+  // To renew the size state of the component
   const changeSizeHandler = () => {
     const realSize = Number(sizeRef.current.value) + 4;
-    // console.log(realSize);
     setSize(realSize);
   };
+  //To renew the speed state of the component
   const changeSpeedHandler = () => {
     const realSpeed = Number(speedRef.current.value) * 10 + 10;
-    // console.log(realSpeed);
     setSpeed(realSpeed);
     dispatch(animationAction.changeSpeed(realSpeed));
   };
+  // to change the method
   const changeSortingMethodHandler = newMethod => {
     setIsReadyToSort(true);
     dispatch(sortingBoxAction.changeMethod(newMethod));
     dispatch(sortingArray(array, newMethod));
-    // setisRunning(true);
   };
+  // to display the sorting result
   const sortingArrayHandler = () => {
     setIsReadyToSort(false);
     dispatch(displayAnimation(sortedData.sortedAnimation, speed));

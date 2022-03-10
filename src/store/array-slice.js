@@ -1,31 +1,12 @@
-/*
-This is the place to create the reducer
-By using @reduxjs/toolkit, you can create a reducer easily!
-Here we create a slice that accepts an initial state,
-an object full of reducer functions,
-and a "slice name",
-and automatically generates action creators
-and action types that correspond to the reducers 
-and state
-*/
-
 import { createSlice } from '@reduxjs/toolkit';
 import createRandomArray from '../algorithms/createRandomArray';
 const initialState = { value: [] };
-// const arrayBars = document.getElementsByClassName('bar');
-// function recoverArray(initialArray) {
-//   for (let i = 0; i < initialArray.length; i++) {
-//     arrayBars[i].style.height = `${initialArray[i]}px`;
-//     arrayBars[i].style.backgroundColor = 'blue';
-//   }
-// }
 
 const arraySlice = createSlice({
   name: 'array',
   initialState,
   reducers: {
     resetArray: (state, action) => {
-      // state.value = createRandomArray(action.payload);
       let data = [];
       createRandomArray(action.payload).forEach(el => {
         data.push({ height: el, color: 'blue' });
