@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/sorting-display-website/static/css/main.7e679eb5.chunk.css",
-    "main.js": "/sorting-display-website/static/js/main.f8ddd34e.chunk.js",
-    "main.js.map": "/sorting-display-website/static/js/main.f8ddd34e.chunk.js.map",
+    "main.css": "/sorting-display-website/static/css/main.ecdd7eac.chunk.css",
+    "main.js": "/sorting-display-website/static/js/main.55289f85.chunk.js",
+    "main.js.map": "/sorting-display-website/static/js/main.55289f85.chunk.js.map",
     "runtime-main.js": "/sorting-display-website/static/js/runtime-main.b0d1172a.js",
     "runtime-main.js.map": "/sorting-display-website/static/js/runtime-main.b0d1172a.js.map",
-    "static/js/2.fded213d.chunk.js": "/sorting-display-website/static/js/2.fded213d.chunk.js",
-    "static/js/2.fded213d.chunk.js.map": "/sorting-display-website/static/js/2.fded213d.chunk.js.map",
+    "static/js/2.cb39f102.chunk.js": "/sorting-display-website/static/js/2.cb39f102.chunk.js",
+    "static/js/2.cb39f102.chunk.js.map": "/sorting-display-website/static/js/2.cb39f102.chunk.js.map",
     "index.html": "/sorting-display-website/index.html",
-    "static/css/main.7e679eb5.chunk.css.map": "/sorting-display-website/static/css/main.7e679eb5.chunk.css.map",
-    "static/js/2.fded213d.chunk.js.LICENSE.txt": "/sorting-display-website/static/js/2.fded213d.chunk.js.LICENSE.txt"
+    "static/css/main.ecdd7eac.chunk.css.map": "/sorting-display-website/static/css/main.ecdd7eac.chunk.css.map",
+    "static/js/2.cb39f102.chunk.js.LICENSE.txt": "/sorting-display-website/static/js/2.cb39f102.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b0d1172a.js",
-    "static/js/2.fded213d.chunk.js",
-    "static/css/main.7e679eb5.chunk.css",
-    "static/js/main.f8ddd34e.chunk.js"
+    "static/js/2.cb39f102.chunk.js",
+    "static/css/main.ecdd7eac.chunk.css",
+    "static/js/main.55289f85.chunk.js"
   ]
 }
